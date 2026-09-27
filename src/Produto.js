@@ -1,4 +1,6 @@
-// 6. Módulos ES6: classe exportada para ser importada no index.js
+// 6. Módulos ES6: importa de outro módulo e exporta a própria classe
+import { formatarMoeda } from "./formatarMoeda.js";
+
 export class Produto {
   constructor(nome, preco, categoria) {
     this.nome = nome;
@@ -10,7 +12,12 @@ export class Produto {
     return this.preco - this.preco * desconto;
   }
 
+  // Operador ternário embutido no método: decide o status com base num limite de preço
+  statusPromocao(limite = 200) {
+    return this.preco < limite ? "Em promoção" : "Preço normal";
+  }
+
   exibirInfo() {
-    return `${this.nome} - R$${this.preco.toFixed(2)}`;
+    return `${this.nome} (${this.categoria}) - ${formatarMoeda(this.preco)}`;
   }
 }
